@@ -105,6 +105,7 @@
             this.exitButton.Text = "Exit";
             this.exitButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // helpButton
             // 
@@ -129,6 +130,7 @@
             this.usersButton.Text = "Users";
             this.usersButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.usersButton.UseVisualStyleBackColor = true;
+            this.usersButton.Click += new System.EventHandler(this.UsersButton_Click);
             // 
             // reportsButton
             // 
@@ -230,8 +232,8 @@
             this.ClientSize = new System.Drawing.Size(960, 532);
             this.Controls.Add(this.infoPanel);
             this.Controls.Add(this.mainPanel);
+            this.IsMdiContainer = true;
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Form";
             this.mainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).EndInit();
@@ -244,7 +246,6 @@
 
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel infoPanel;
-        private System.Windows.Forms.PictureBox userPictureBox;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.Button usersButton;
@@ -253,10 +254,11 @@
         private System.Windows.Forms.Button inboxButton;
         private System.Windows.Forms.Button sendSMSButton;
         private System.Windows.Forms.Button dataButton;
-        private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Button backgroundButton;
         private System.Windows.Forms.Button skinButton;
         private System.Windows.Forms.Panel dividerPanel;
+        public System.Windows.Forms.PictureBox userPictureBox;
+        public System.Windows.Forms.Label userLabel;
     }
 }
 

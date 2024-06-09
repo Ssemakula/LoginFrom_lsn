@@ -34,6 +34,7 @@
             this.usersTableAdapter = new LoginFrom_lsn.UsersTableAdapters.UsersTableAdapter();
             this.tableAdapterManager = new LoginFrom_lsn.UsersTableAdapters.TableAdapterManager();
             this.usersDataGridView = new System.Windows.Forms.DataGridView();
+            this.editButton = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +47,6 @@
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.editButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.users)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersDataGridView)).BeginInit();
@@ -99,6 +99,18 @@
             this.usersDataGridView.RowTemplate.Height = 50;
             this.usersDataGridView.Size = new System.Drawing.Size(606, 374);
             this.usersDataGridView.TabIndex = 1;
+            // 
+            // editButton
+            // 
+            this.editButton.Image = global::LoginFrom_lsn.Properties.Resources._7388_forum_friends_group_member_people_icon;
+            this.editButton.Location = new System.Drawing.Point(12, 392);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(134, 48);
+            this.editButton.TabIndex = 2;
+            this.editButton.Text = "Add/Edit Users";
+            this.editButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // ID
             // 
@@ -192,21 +204,10 @@
             // 
             this.UserImage.DataPropertyName = "UserImage";
             this.UserImage.HeaderText = "UserImage";
+            this.UserImage.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.UserImage.Name = "UserImage";
             this.UserImage.ReadOnly = true;
             this.UserImage.Width = 150;
-            // 
-            // editButton
-            // 
-            this.editButton.Image = global::LoginFrom_lsn.Properties.Resources._7388_forum_friends_group_member_people_icon;
-            this.editButton.Location = new System.Drawing.Point(12, 392);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(134, 48);
-            this.editButton.TabIndex = 2;
-            this.editButton.Text = "Add/Edit Users";
-            this.editButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // UserList
             // 

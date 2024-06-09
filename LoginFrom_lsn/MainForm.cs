@@ -16,5 +16,25 @@ namespace LoginFrom_lsn
         {
             InitializeComponent();
         }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void UsersButton_Click(object sender, EventArgs e)
+        {
+            foreach(Form form in Application.OpenForms)
+            {
+                if(form.GetType() == typeof(UserList))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            UserList userList = new UserList();
+            userList.MdiParent = this;
+            userList.Show();
+        }
     }
 }

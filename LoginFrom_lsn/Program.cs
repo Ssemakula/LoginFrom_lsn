@@ -16,7 +16,21 @@ namespace LoginFrom_lsn
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserList());
+            LoginForm loginForm = new LoginForm(); //Is this "bad"???
+            loginForm.ShowDialog();
+            if(loginForm.IsPasswordCorrect )
+            {
+                MainForm mainForm = new MainForm();
+                mainForm.userLabel.Text = loginForm.usernameComboBox.Text;
+                mainForm.userPictureBox.Image = loginForm.userPictureBox.Image;
+                loginForm.Dispose();
+                //Alternative is put it in the MainForm load
+                Application.Run(mainForm);
+            }
+            else
+            {
+                loginForm.Dispose();
+            }
         }
     }
 }

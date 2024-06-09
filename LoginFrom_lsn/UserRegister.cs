@@ -97,6 +97,11 @@ namespace LoginFrom_lsn
         private void SaveButton_Click(object sender, EventArgs e)
         {
             ButtonsShow();
+            if(this.userPassTextBox.Text != this.rptPassTextBox.Text)
+            {
+                MessageBox.Show("Passwords must be the same");
+                return;
+            }
             this.usersBindingSource.EndEdit();
             if (this.usersTableAdapter.Update(this.users._Users) > 0) 
             {
