@@ -26,6 +26,7 @@ namespace LoginFrom_lsn
                 loginForm.Dispose();
                 //Alternative is put it in the MainForm load
                 Application.Run(mainForm);
+                //Application.Run(new ProductList());
             }
             else
             {

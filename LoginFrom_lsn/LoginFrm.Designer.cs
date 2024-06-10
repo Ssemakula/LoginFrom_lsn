@@ -75,6 +75,7 @@
             this.usernameComboBox.Name = "usernameComboBox";
             this.usernameComboBox.Size = new System.Drawing.Size(121, 21);
             this.usernameComboBox.TabIndex = 1;
+            this.usernameComboBox.ValueMember = "ID";
             // 
             // userNameLabel
             // 

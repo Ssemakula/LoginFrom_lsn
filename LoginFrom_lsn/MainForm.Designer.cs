@@ -191,6 +191,7 @@
             this.dataButton.Text = "Data";
             this.dataButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.dataButton.UseVisualStyleBackColor = true;
+            this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
             // infoPanel
             // 
@@ -198,7 +199,7 @@
             this.infoPanel.Controls.Add(this.backgroundButton);
             this.infoPanel.Controls.Add(this.skinButton);
             this.infoPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.infoPanel.Location = new System.Drawing.Point(0, 501);
+            this.infoPanel.Location = new System.Drawing.Point(0, 567);
             this.infoPanel.Name = "infoPanel";
             this.infoPanel.Size = new System.Drawing.Size(960, 31);
             this.infoPanel.TabIndex = 1;
@@ -229,7 +230,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 532);
+            this.ClientSize = new System.Drawing.Size(960, 598);
             this.Controls.Add(this.infoPanel);
             this.Controls.Add(this.mainPanel);
             this.IsMdiContainer = true;

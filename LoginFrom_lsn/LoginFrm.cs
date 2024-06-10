@@ -30,6 +30,7 @@ namespace LoginFrom_lsn
         {
             // TODO: This line of code loads data into the 'users._Users' table. You can move, or remove it, as needed.
             this.usersTableAdapter.Fill(this.users._Users);
+            passwordTextBox.Focus(); //Also check this
 
         }
 
@@ -47,6 +48,9 @@ namespace LoginFrom_lsn
             {
                 //Close this with success
                 IsPasswordCorrect = true;
+                long _ID = (long) usernameComboBox.SelectedValue; //Combo box not picking????
+                LoginFrom_lsn.Properties.Settings.Default.UserID = _ID;
+                LoginFrom_lsn.Properties.Settings.Default.UserName = this.usernameComboBox.Text;
                 this.Close();
             }
             else

@@ -36,5 +36,21 @@ namespace LoginFrom_lsn
             userList.MdiParent = this;
             userList.Show();
         }
+
+        private void DataButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(ProductList))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            ProductList productList = new ProductList();
+            productList.MdiParent = this;
+            productList.Show();
+        }
     }
 }
