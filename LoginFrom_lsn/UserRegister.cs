@@ -31,7 +31,14 @@ namespace LoginFrom_lsn
         private void UserRegister_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'users._Users' table. You can move, or remove it, as needed.
-            this.usersTableAdapter.FillBy_ID(this.users._Users, CurrID);
+            try
+            {
+                this.usersTableAdapter.FillBy_ID(this.users._Users, CurrID);
+            }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message); 
+            }
             ButtonsShow();
 
         }
@@ -68,7 +75,15 @@ namespace LoginFrom_lsn
         private void NewButton_Click(object sender, EventArgs e)
         {
             ButtonsShow(false);
-            this.usersBindingSource.AddNew();
+            try
+            {
+                this.usersBindingSource.AddNew();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -90,7 +105,15 @@ namespace LoginFrom_lsn
             }
             ButtonsShow(false);
             this.infoGroupBox.Enabled=false;
-            this.usersBindingSource.RemoveCurrent();
+            try
+            {
+                this.usersBindingSource.RemoveCurrent();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
             isDeleting = true;
         }
 
@@ -102,37 +125,53 @@ namespace LoginFrom_lsn
                 MessageBox.Show("Passwords must be the same");
                 return;
             }
-            this.usersBindingSource.EndEdit();
-            if (this.usersTableAdapter.Update(this.users._Users) > 0) 
+            try
             {
-                if (isDeleting)
+                this.usersBindingSource.EndEdit();
+                if (this.usersTableAdapter.Update(this.users._Users) > 0)
                 {
-                    Notify("Record successfully deleted", "Delete");
-                    isDeleting = false;
+                    if (isDeleting)
+                    {
+                        Notify("Record successfully deleted", "Delete");
+                        isDeleting = false;
+                    }
+                    else
+                    {
+                        if (IsTrue(iDTextBox.Text))
+                        {
+                            CurrID = GetPosition();
+                        }
+                        this.usersTableAdapter.FillBy_ID(this.users._Users, CurrID);
+                        Notify("Record successfully saved", "Save");
+                    }
                 }
                 else
                 {
-                    if(IsTrue(iDTextBox.Text))
-                    {
-                        CurrID = GetPosition();
-                    }
-                    this.usersTableAdapter.FillBy_ID(this.users._Users, CurrID);
-                    Notify("Record successfully saved", "Save");
+                    MessageBox.Show("Failed to update database");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed to update database");
+
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
             ButtonsShow();
-            this.usersBindingSource.CancelEdit();
-            this.users._Users.RejectChanges();
-            this.isDeleting = false;
-            Notify("Changes cancelled");
+            try
+            {
+                this.usersBindingSource.CancelEdit();
+                this.users._Users.RejectChanges();
+                this.isDeleting = false;
+                Notify("Changes cancelled");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void UserImageButton_Click(object sender, EventArgs e)
@@ -144,7 +183,15 @@ namespace LoginFrom_lsn
             {
                 string imageFIle;
                 imageFIle = dlg.FileName;
-                this.userPictureBox.Image = Image.FromFile(imageFIle);
+                try
+                {
+                    this.userPictureBox.Image = Image.FromFile(imageFIle);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

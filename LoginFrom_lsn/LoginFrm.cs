@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,7 +30,15 @@ namespace LoginFrom_lsn
         private void LoginForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'users._Users' table. You can move, or remove it, as needed.
-            this.usersTableAdapter.Fill(this.users._Users);
+            try
+            {
+                this.usersTableAdapter.Fill(this.users._Users);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            usernameComboBox.SelectedValue = (int) LoginFrom_lsn.Properties.Settings.Default.UserID;
             passwordTextBox.Focus(); //Also check this
 
         }
@@ -51,6 +60,7 @@ namespace LoginFrom_lsn
                 long _ID = (long) usernameComboBox.SelectedValue; //Combo box not picking????
                 LoginFrom_lsn.Properties.Settings.Default.UserID = _ID;
                 LoginFrom_lsn.Properties.Settings.Default.UserName = this.usernameComboBox.Text;
+                LoginFrom_lsn.Properties.Settings.Default.Save();
                 this.Close();
             }
             else

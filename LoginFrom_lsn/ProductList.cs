@@ -30,7 +30,14 @@ namespace LoginFrom_lsn
         private void ProductList_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'users.Products' table. You can move, or remove it, as needed.
-            this.productsTableAdapter.Fill(this.users.Products);
+            try
+            {
+                productsTableAdapter.Fill(users.Products);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             ButtonsShow();
         }
 
@@ -38,35 +45,36 @@ namespace LoginFrom_lsn
         {
             if (viewMode)
             {
-                this.newButton.Enabled = true;
-                this.editButton.Enabled = true;
-                this.deleteButton.Enabled = true;
-                this.saveButton.Enabled = false;
-                this.cancelButton.Enabled = false;
-                this.exitButton.Enabled = true;
-                this.infoGroupBox.Enabled = false;
+                newButton.Enabled = true;
+                editButton.Enabled = true;
+                deleteButton.Enabled = true;
+                saveButton.Enabled = false;
+                cancelButton.Enabled = false;
+                exitButton.Enabled = true;
+                infoGroupBox.Enabled = false;
             }
             else
             {
-                this.newButton.Enabled = false;
-                this.editButton.Enabled = false;
-                this.deleteButton.Enabled = false;
-                this.saveButton.Enabled = true;
-                this.cancelButton.Enabled = true;
-                this.exitButton.Enabled = false;
-                this.infoGroupBox.Enabled = true;
+                newButton.Enabled = false;
+                editButton.Enabled = false;
+                deleteButton.Enabled = false;
+                saveButton.Enabled = true;
+                cancelButton.Enabled = true;
+                exitButton.Enabled = false;
+                infoGroupBox.Enabled = true;
             }
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void NewButton_Click(object sender, EventArgs e)
         {
             ButtonsShow(false);
-            this.productsBindingSource.AddNew();
+            productsBindingSource.AddNew();
+            LableUpdate();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -88,30 +96,46 @@ namespace LoginFrom_lsn
                 return;
             }
             ButtonsShow(false);
-            this.infoGroupBox.Enabled = false;
-            this.productsBindingSource.RemoveCurrent();
+            infoGroupBox.Enabled = false;
+            try
+            {
+                productsBindingSource.RemoveCurrent();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
             isDeleting = true;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             ButtonsShow();
-            this.productsBindingSource.EndEdit();
-            if (this.productsTableAdapter.Update(this.users.Products) > 0)
+            try
             {
-                if (isDeleting)
+                productsBindingSource.EndEdit();
+                if (productsTableAdapter.Update(users.Products) > 0)
                 {
-                    Notify("Record successfully deleted", "Delete");
-                    isDeleting = false;
+                    if (isDeleting)
+                    {
+                        Notify("Record successfully deleted", "Delete");
+                        isDeleting = false;
+                    }
+                    else
+                    {
+                        Notify("Record successfully saved", "Save");
+                    }
                 }
                 else
                 {
-                    Notify("Record successfully saved", "Save");
+                    MessageBox.Show("Failed to update database");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed to update database");
+
+                MessageBox.Show(ex.Message);
             }
             LableUpdate();
         }
@@ -119,19 +143,27 @@ namespace LoginFrom_lsn
         private void CancelButton_Click(object sender, EventArgs e)
         {
             ButtonsShow();
-            this.productsBindingSource.CancelEdit();
-            this.users.Products.RejectChanges();
-            this.isDeleting = false;
+            try
+            {
+                productsBindingSource.CancelEdit();
+                users.Products.RejectChanges();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            isDeleting = false;
             Notify("Changes cancelled");
         }
 
         private void LableUpdate()
         {
-            this.userIDLabel1.Text = LoginFrom_lsn.Properties.Settings.Default.UserID.ToString();
-            this.userNameLabel1.Text = LoginFrom_lsn.Properties.Settings.Default.UserName.ToString();
+            userIDLabel1.Text = LoginFrom_lsn.Properties.Settings.Default.UserID.ToString();
+            userNameLabel1.Text = LoginFrom_lsn.Properties.Settings.Default.UserName.ToString();
             ///Date and time
-            this.sysDateLabel1.Text = DateTime.Now.ToShortDateString();
-            this.sysTimeLabel1.Text = DateTime.Now.ToString("HH:mm:ss");
+            sysDateLabel1.Text = DateTime.Now.ToShortDateString();
+            sysTimeLabel1.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

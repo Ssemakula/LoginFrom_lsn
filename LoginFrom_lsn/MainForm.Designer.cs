@@ -235,7 +235,7 @@
             this.Controls.Add(this.mainPanel);
             this.IsMdiContainer = true;
             this.Name = "MainForm";
-            this.Text = "Main Form";
+            this.Text = " ";
             this.mainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).EndInit();
             this.infoPanel.ResumeLayout(false);
